@@ -26,8 +26,13 @@ def run_training_pipeline():
         raise ValueError("Dataset must contain 'text' and 'label' columns.")
     
     # Map labels to 0 and 1
-    if df['label'].dtype == object:
-        df['label'] = df['label'].map({'spam': 1, 'not_spam': 0})
+    # (works for pandas object AND the newer 'str' dtype)
+    if not pd.api.types.is_numeric_dtype(df['label']):
+        label_map = {'spam': 1, 'not_spam': 0, 'not spam': 0, 'ham': 0, '1': 1, '0': 0}
+        df['label'] = df['label'].astype(str).str.strip().str.lower().map(label_map)
+    if df['label'].isna().any():
+        raise ValueError("Some labels could not be mapped to 0/1. Check the 'label' column values.")
+    df['label'] = df['label'].astype(int)
         
     print(f"Data loaded successfully. Total records: {len(df)}")
     print(f"Class distribution:\n{df['label'].value_counts(normalize=True) * 100}\n")
