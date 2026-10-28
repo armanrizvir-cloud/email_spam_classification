@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 import joblib
 import numpy as np
@@ -13,6 +14,9 @@ from sklearn.model_selection import train_test_split
 st.set_page_config(page_title="MailGuard: Spam Filter", page_icon="🛡️", layout="wide")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # app.py lives in the repo root
+for _p in (BASE_DIR, os.path.join(BASE_DIR, "src")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 MODEL_PATH = os.path.join(MODEL_DIR, "best_model.pkl")
 VEC_PATH = os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl")
