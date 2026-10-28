@@ -4,8 +4,12 @@ import joblib
 import os
 import json
 
-from src.preprocessor import SpamPreprocessor
-from src.models import SpamModelTrainer
+try:
+    from src.preprocessor import SpamPreprocessor
+    from src.models import SpamModelTrainer
+except ModuleNotFoundError:  # flat layout: files next to this script
+    from preprocessor import SpamPreprocessor
+    from models import SpamModelTrainer
 
 def run_training_pipeline():
     print("🚀 Starting MailGuard Training Pipeline...\n")
