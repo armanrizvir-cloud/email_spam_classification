@@ -1,8 +1,0 @@
-pandas
-scikit-learn
-dash
-dash-bootstrap-components
-plotly
-datasets
-python-pptx
-joblib
