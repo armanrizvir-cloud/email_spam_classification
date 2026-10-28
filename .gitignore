@@ -1,0 +1,15 @@
+# Data files
+data/
+*.csv
+
+# Saved models
+models/
+*.pkl
+*.joblib
+*.json
+
+# Python cache
+__pycache__/
+*.py[cod]
+*~
+.DS_Store
