@@ -1,8 +1,7 @@
+streamlit>=1.50
 pandas
+numpy
 scikit-learn
-dash
-dash-bootstrap-components
 plotly
-datasets
-python-pptx
 joblib
+datasets
