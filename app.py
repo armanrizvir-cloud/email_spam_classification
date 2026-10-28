@@ -67,8 +67,9 @@ def load_dataset():
 
             download_and_prepare_dataset()
         df = pd.read_csv(DATA_PATH)
-        if df["label"].dtype == object:
-            df["label"] = df["label"].map({"spam": 1, "not_spam": 0})
+        if not pd.api.types.is_numeric_dtype(df["label"]):
+            lm = {"spam": 1, "not_spam": 0, "not spam": 0, "ham": 0, "1": 1, "0": 0}
+            df["label"] = df["label"].astype(str).str.strip().str.lower().map(lm)
         df["text"] = df["text"].fillna("")
         df = df.dropna(subset=["label"])
         df["label"] = df["label"].astype(int)
